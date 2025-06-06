@@ -46,3 +46,17 @@ body {
   color: #555;
   font-size: 0.95rem;
 }
+
+.carousel-inner img {
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.carousel-img {
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.left-column h3 {
+  margin-top: 1rem;
+}
