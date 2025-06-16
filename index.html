@@ -187,4 +187,27 @@ function copyEmail(event) {
 <!-- Load 3 random images -->
 <script>
 fetch('images.json')
-  .then(response => response.js
+  .then(response => response.json())
+  .then(images => {
+    const shuffled = images.sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 3);
+    const container = document.getElementById('random-images-container');
+
+    selected.forEach((url, index) => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = `Random photo ${index + 1}`;
+      img.className = 'img-fluid rounded';
+      img.style.maxWidth = '600px';
+      container.appendChild(img);
+    });
+  })
+  .catch(err => console.error('Error loading images:', err));
+</script>
+
+</body>
+</html>
+
+
+</body>
+</html>
