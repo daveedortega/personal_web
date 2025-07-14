@@ -84,20 +84,33 @@
       </ul>
 
       <!-- Tab panes -->
+      
+      <!-- Home Page -->
       <div class="tab-content">
+
         <div class="tab-pane fade show active" id="home" role="tabpanel">
           <h4>Welcome</h4>
           <p>I really am amazed at this fricking ai thing. I just vibecoded this in a whim, didn't take me more than two hours. <br>
             It's gonna be changing a lot but for now this is it! I was trying to make a webpage of sorts in order to keep my files in order and 
             what not, but now it's just here!
-            <br>
+          </p>            
 
-            Hello world!
-            <br>
-            As of right now I have been trying to take some more pictures, run, be happy, idk. Working in the government has proven not only hard and 
-            exhausting but extremely demoralizing. Specially for someone who is always trying to get things to change. I guess. 
-          </p>
+       <div class="text-dropdown">
+            <div class="text-title" onclick="toggleText('text1')">
+              <h5>
+                On AI
+                <span class="dropdown-arrow" id="arrow1">></span>
+              </h5>
         </div>
+            <div class="text-content" id="text1">
+              <div class="text-meta">13/07/25</div>
+              <p> thIS IS A TXT!</p>
+            </div>
+          </div>
+      </div>
+
+
+      <!------Texts ---->
         <div class="tab-pane fade" id="texts" role="tabpanel">
           <h4>From short stories to serious things, who knows what you'll find here!</h4>
           <br>
@@ -105,8 +118,15 @@
       
           <div class="medium-posts">
             <div class="post">
-              <h5><a href="https://medium.com/@mexa.oal/como-antes-v-2-bce071b3cb7c" target="_blank">Newest Medium Text!</a></h5>
+              <h5><a href="https://medium.com/@mexa.oal/why-i-run-bbaf76aba717" target = '_blank'>Why I run.</a></h5>
+            </div>
+            <div class="post">
+              <h5><a href="https://medium.com/@mexa.oal/como-antes-v-2-bce071b3cb7c" target="_blank">Notes on public administration v.2</a></h5>
               <p class="snippet">I've been thinking a lot about public administration and why I started, how it has changed me, idk, some ideas.</p>
+            </div>
+            <div class = 'post'>
+              <h5><a href="https://medium.com/@mexa.oal/notas-sobre-el-servicio-público-v-1-943d7384b92e" target. = "_blank">Some ideas of public service V.1</a></h5>
+              <p class="snippet">Trying hard to write something about the government.</p>
             </div>
             <div class="post">
               <h5><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5248915" target="_blank">My Thesis!</a></h5>
@@ -120,12 +140,10 @@
               <h5><a href="https://medium.com/@mexa.oal/i-guess-there-really-is-no-path-and-no-rules-to-this-thing-93fd8d3b7846" target="_blank">Beginning to write again</a></h5>
               <p class="snippet">First medium text in a while.</p>
             </div>
-            <div class = 'post'>
-              <h5><a href="https://medium.com/@mexa.oal/notas-sobre-el-servicio-público-v-1-943d7384b92e" target. = "_blank">Some ideas of public service</a></h5>
-              <p class="snippet">Trying hard to write something about the government.</p>
-            </div>
           </div>
         </div>
+
+        <!------Images (Photos) ---->
         <div class="tab-pane fade" id="photos" role="tabpanel">
           <h4>Photos</h4>
           <h5>Random  pictures I took. They change everytime you reload, cool no?.</h5>
@@ -135,6 +153,7 @@
           </div>
 
         </div>
+        <!------Other Cool things ---->
         <div class="tab-pane fade" id="cool" role="tabpanel">
           <h4>Cool Stuff</h4>
           <p>Maps, experiments, or code projects can live here.</p>
@@ -224,6 +243,21 @@ fetch('images.json')
     });
   })
   .catch(err => console.error('Error loading images:', err));
+</script>
+<!------Script to toggle texts in home page------->
+<script>
+  function toggleText(textId) {
+  const content = document.getElementById(textId);
+  const arrow = document.getElementById('arrow' + textId.slice(-1));
+  
+  if (content.classList.contains('show')) {
+    content.classList.remove('show');
+    arrow.classList.remove('rotated');
+  } else {
+    content.classList.add('show');
+    arrow.classList.add('rotated');
+  }
+}
 </script>
 
 </body>
