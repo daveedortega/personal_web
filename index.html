@@ -16,6 +16,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
+    <!--markdown-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
 </head>
 <body>
 
@@ -103,8 +105,7 @@
               </h5>
         </div>
             <div class="text-content" id="text1">
-              <div class="text-meta">13/07/25</div>
-              <p> thIS IS A TXT!</p>
+              <div class="markdown-content" data-src="texts/text_20250715.md"></div>
             </div>
           </div>
       </div>
@@ -173,10 +174,8 @@
           </p>
           <hr style="border: none; border-top: 3px solid black; margin: 2rem 0;">
 
-          <br>
           <p>I made a cool CNN thing on an MIT course I took. It is crazy how usable these have become. </p>
             <a href="cool_html/image_cnn.html">📘 View Notebook Output</a>
-          <br>
           <br>
           <hr style="border: none; border-top: 3px solid black; margin: 2rem 0;">
           <br>  
@@ -222,8 +221,6 @@ function copyEmail(event) {
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
 
-<!-- Your other content... -->
-
 <!-- Load 3 random images -->
 <script>
 fetch('images.json')
@@ -244,11 +241,20 @@ fetch('images.json')
   })
   .catch(err => console.error('Error loading images:', err));
 </script>
+
 <!------Script to toggle texts in home page------->
-<script>
-  function toggleText(textId) {
+  <script>
+async function loadText(element) {
+  const src = element.getAttribute('data-src');
+  const response = await fetch(src);
+  const markdown = await response.text();
+  element.innerHTML = marked.parse(markdown);
+}
+
+function toggleText(textId) {
   const content = document.getElementById(textId);
   const arrow = document.getElementById('arrow' + textId.slice(-1));
+  const markdownDiv = content.querySelector('.markdown-content');
   
   if (content.classList.contains('show')) {
     content.classList.remove('show');
@@ -256,6 +262,11 @@ fetch('images.json')
   } else {
     content.classList.add('show');
     arrow.classList.add('rotated');
+    
+    // Load markdown if not already loaded
+    if (markdownDiv && markdownDiv.innerHTML === '') {
+      loadText(markdownDiv);
+    }
   }
 }
 </script>
