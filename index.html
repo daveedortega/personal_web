@@ -205,7 +205,7 @@
         <div class="tab-pane fade" id="projects" role="tabpanel">
           <h4>More serious projects</h4>
           <h7>Some ongoing, more serious projects.</h7>
-<hr style="border: none; border-top: 3px solid black; margin: 2rem 0;">
+          <hr style="border: none; border-top: 3px solid black; margin: 2rem 0;">
           <p>My thesis, now in a working paper format, pretty proud of it.</p>
           <a href="./thesis_wp/working_paper_did.pdf" target="_blank" class="btn btn-primary">
             Check it out!
@@ -233,6 +233,7 @@
         <div class="tab-pane fade" id="photos" role="tabpanel">
           <h4>Photos</h4>
           <h5>Random  pictures I took. They change everytime you reload, cool no?.</h5>
+          <button onclick="loadRandomImages()">↻ More photos</button>
           <br>
           <div id="random-images-container" class="d-flex flex-column align-items-center gap-3">
               <!-- Random images will be inserted here -->
@@ -324,23 +325,30 @@ function copyEmail(event) {
 
 <!-- Load 3 random images -->
 <script>
-fetch('images.json')
-  .then(response => response.json())
-  .then(images => {
-    const shuffled = images.sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, 3);
-    const container = document.getElementById('random-images-container');
+function loadRandomImages() {
+  fetch('images.json')
+    .then(response => response.json())
+    .then(images => {
+      const shuffled = [...images].sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 3);
 
-    selected.forEach((url, index) => {
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = `Random photo ${index + 1}`;
-      img.className = 'img-fluid rounded';
-      img.style.maxWidth = '600px';
-      container.appendChild(img);
-    });
-  })
-  .catch(err => console.error('Error loading images:', err));
+      const container = document.getElementById('random-images-container');
+      container.innerHTML = "";
+
+      selected.forEach((url, index) => {
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = `Random photo ${index + 1}`;
+        img.className = 'img-fluid rounded';
+        img.style.maxWidth = '600px';
+        container.appendChild(img);
+      });
+    })
+    .catch(err => console.error('Error loading images:', err));
+}
+
+// Load 3 photos when the page first opens
+loadRandomImages();
 </script>
 
 <!------Script to toggle texts in home page------->
